@@ -26,7 +26,7 @@ class SearchViewModel : ViewModel() {
         return searchLiveData
     }
 
-    fun updateWord(word:EntityDict,context: Context) {
+    fun updateWord(word:EntityDict?,context: Context) {
         val repository = WordRepository(context)
         repository.updateWord(word)
     }

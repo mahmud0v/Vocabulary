@@ -16,21 +16,22 @@ import uz.gita.vocabulary.adapter.ClickItemListener
 import uz.gita.vocabulary.adapter.WordAdapter
 import uz.gita.vocabulary.databinding.BookmarkScreenBinding
 import uz.gita.vocabulary.db.EntityDict
+import uz.gita.vocabulary.ui.dialog.WordInfoDialog
 import uz.gita.vocabulary.ui.viewmodel.BookmarkViewModel
 
 
-class BookmarkScreen : Fragment(),  ClickItemListener {
+class BookmarkScreen : Fragment(), ClickItemListener {
     private var _binding: BookmarkScreenBinding? = null
     private val binding get() = _binding!!
-    private lateinit var bookmarkLiveData:LiveData<List<EntityDict>>
-    private lateinit var adapter:WordAdapter
-    private val viewModel:BookmarkViewModel by viewModels()
+    private lateinit var bookmarkLiveData: LiveData<List<EntityDict>>
+    private lateinit var adapter: WordAdapter
+    private val viewModel: BookmarkViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _binding = BookmarkScreenBinding.inflate(inflater,container,false)
+        _binding = BookmarkScreenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -38,31 +39,32 @@ class BookmarkScreen : Fragment(),  ClickItemListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter = WordAdapter(this)
         val str = "%1%"
-        bookmarkLiveData = viewModel.bookmarkWords(requireContext(),str)
-        bookmarkLiveData.observe(viewLifecycleOwner,observer)
+        bookmarkLiveData = viewModel.bookmarkWords(requireContext(), str)
+        bookmarkLiveData.observe(viewLifecycleOwner, observer)
         binding.bookmarkRvView.adapter = adapter
         binding.bookmarkRvView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-     private val observer = Observer<List<EntityDict>>{
-         adapter.differ.submitList(it)
-     }
+    private val observer = Observer<List<EntityDict>> {
+        adapter.differ.submitList(it)
+    }
 
     override fun onItemClickListener(data: EntityDict) {
+
         val bundle = Bundle().apply {
             putParcelable("key", data)
         }
-        findNavController().navigate(R.id.action_bookmarkFragment_to_wordInfoScreen, bundle)
+        val dialog = WordInfoDialog()
+        dialog.arguments = bundle
+        dialog.isCancelable = false
+        dialog.show(requireActivity().supportFragmentManager, "Dialog")
     }
-
 
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-
-
 
 
 }

@@ -16,7 +16,7 @@
             app:destination="@id/historyFragment" />
         <action
             android:id="@+id/action_searchFragment_to_wordInfoScreen"
-            app:destination="@id/wordInfoScreen" />
+            />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -28,7 +28,7 @@
             app:destination="@id/bookmarkFragment" />
         <action
             android:id="@+id/action_historyFragment_to_wordInfoScreen"
-            app:destination="@id/wordInfoScreen" />
+            />
     </fragment>
     <fragment
         tools:layout="@layout/bookmark_screen"
@@ -37,11 +37,7 @@
         android:label="BookmarkFragment" >
         <action
             android:id="@+id/action_bookmarkFragment_to_wordInfoScreen"
-            app:destination="@id/wordInfoScreen" />
+            />
     </fragment>
-    <fragment
-        android:id="@+id/wordInfoScreen"
-        tools:layout="@layout/word_info_screen"
-        android:name="uz.gita.vocabulary.ui.screens.WordInfoScreen"
-        android:label="WordInfoScreen" />
+
 </navigation>

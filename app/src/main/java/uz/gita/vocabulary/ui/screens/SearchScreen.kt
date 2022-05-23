@@ -16,6 +16,7 @@ import uz.gita.vocabulary.adapter.ClickItemListener
 import uz.gita.vocabulary.adapter.WordAdapter
 import uz.gita.vocabulary.databinding.SearchScreenBinding
 import uz.gita.vocabulary.db.EntityDict
+import uz.gita.vocabulary.ui.dialog.WordInfoDialog
 import uz.gita.vocabulary.ui.viewmodel.SearchViewModel
 
 class SearchScreen : Fragment(), ClickItemListener {
@@ -79,7 +80,13 @@ class SearchScreen : Fragment(), ClickItemListener {
         val bundle = Bundle().apply {
             putParcelable("key", data)
         }
-        findNavController().navigate(R.id.action_searchFragment_to_wordInfoScreen, bundle)
+
+         val dialog = WordInfoDialog()
+             dialog.arguments = bundle
+             dialog.isCancelable = false
+             dialog.show(requireActivity().supportFragmentManager,"Dialog")
+
+
     }
 
 

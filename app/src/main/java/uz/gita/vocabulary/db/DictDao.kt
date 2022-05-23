@@ -21,7 +21,7 @@ interface DictDao {
     fun bookmarkWord(str: String?): List<EntityDict>
 
     @Update
-    fun updateWord(word: EntityDict)
+    fun updateWord(word: EntityDict?)
 
 
 }

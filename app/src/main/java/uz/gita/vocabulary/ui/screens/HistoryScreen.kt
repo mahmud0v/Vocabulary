@@ -15,6 +15,7 @@ import uz.gita.vocabulary.adapter.ClickItemListener
 import uz.gita.vocabulary.adapter.WordAdapter
 import uz.gita.vocabulary.databinding.HistoryScreenBinding
 import uz.gita.vocabulary.db.EntityDict
+import uz.gita.vocabulary.ui.dialog.WordInfoDialog
 import uz.gita.vocabulary.ui.viewmodel.HistoryViewModel
 
 class HistoryScreen : Fragment(), ClickItemListener {
@@ -52,7 +53,11 @@ class HistoryScreen : Fragment(), ClickItemListener {
         val bundle = Bundle().apply {
             putParcelable("key", data)
         }
-        findNavController().navigate(R.id.action_historyFragment_to_wordInfoScreen, bundle)
+
+        val dialog = WordInfoDialog()
+        dialog.arguments = bundle
+        dialog.isCancelable = false
+        dialog.show(requireActivity().supportFragmentManager, "Dialog")
     }
 
 

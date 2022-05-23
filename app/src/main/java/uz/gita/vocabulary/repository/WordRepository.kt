@@ -21,7 +21,7 @@ class WordRepository(context:Context) {
     fun bookmarkWord(rate:String) = wordDao.bookmarkWord(rate)
 
 
-    fun updateWord(word:EntityDict) = wordDao.updateWord(word)
+    fun updateWord(word:EntityDict?) = wordDao.updateWord(word)
 
 
 }
